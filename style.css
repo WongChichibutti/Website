@@ -61,9 +61,10 @@ body, html {
 }
 .image-button-container {
   display: flex;
-  justify-content: center; /* centers the buttons */
-  gap: 50px; /* adds space between them */
-  margin-top: 20px; /* optional: space below header */
+  flex-direction: column;  /* stack vertically */
+  align-items: center;     /* center horizontally */
+  gap: 1px; /* adds space between them */
+  margin-top: 10px; /* optional: space below header */
 }
 
 .image-button {
