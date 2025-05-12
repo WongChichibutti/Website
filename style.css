@@ -1,0 +1,88 @@
+/* Reset basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Background Video */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+/* Header Bar with background image */
+.header-bar {
+  background-image: url("Assets/vine1.png");
+  background-size: contain;
+  background-position: top center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  height: 500px;
+  background-repeat: no-repeat;
+  
+}
+
+/* Navigation links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/* Centered content over the video */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  text-align: center;
+
+}
+.image-button-container {
+  display: flex;
+  flex-direction: column;  /* stack vertically */
+  align-items: center;     /* center horizontally */
+  gap: 1px; /* adds space between them */
+  margin-top: 10px; /* optional: space below header */
+}
+
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.image-button img {
+  width: 300px; /* adjust size as needed */
+  height: auto;
+  transition: transform 0.2s;
+}
+
+.image-button img:hover {
+  transform: scale(1.05);
+}
+
+
+  
