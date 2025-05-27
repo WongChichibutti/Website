@@ -535,7 +535,7 @@ input[type="radio"]:checked + .detail-button {
   }
 
   .image-button-container {
-    margin-top: 20px; /* Increased margin for spacing */
+    margin-top: 10px; /* Increased margin for spacing */
   }
 
   .image-button img {
