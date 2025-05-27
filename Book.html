@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Assets/favicon.png" />
+</head>
+<body>
+  <!-- Top nav bar with sublinks -->
+  <header class="top-nav">
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="Quote.html">Get a Quote</a>
+      <a href="contact.html">Contact</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="Policy.html">Policy</a>
+      <a href="Book.html">Book Now Coming Soon!</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      &#9776;
+    </div>
+  </header>
+
+  <!-- Decorative vine header -->
+  <header class="header-bar">
+    <!-- Keep as-is -->
+  </header>
+
+  <!-- Background Video -->
+  <div id="bg-image"></div>
+
+  <!-- Main content -->
+  <main>
+    <div class="image-button-container">
+      <button class="image-button" onclick="location.href='Index.html'">
+        <img src="Assets/Backbtn.png" alt="Click Me" />
+    </div>
+  </main>
+
+  <!-- JavaScript for hamburger toggle -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
