@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Your Quote</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Assets/favicon.png" />
+  <style>
+  
+    .confirmation-box {
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 2px solid rgb(80, 200, 120);
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 600px;
+      margin: 100px auto;
+      color: rgb(80, 200, 120);
+      font-size: 1.1rem;
+    }
+
+    .confirmation-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .confirmation-box button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .confirm-btn {
+      background-color: rgb(80, 200, 120);
+      color: black;
+    }
+
+    .cancel-btn {
+      background-color: #666;
+      color: white;
+      margin-left: 10px;
+    }
+
+    .summary-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(80, 200, 120, 0.3);
+    }
+
+    .summary-row .label {
+      width: 40%;
+      text-align: left;
+      font-weight: bold;
+      color: rgb(80, 200, 120);
+    }
+
+    .summary-row .value {
+      width: 60%;
+      text-align: center;
+      color: white;
+    }
+
+    .summary-row.total .value {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: rgb(80, 200, 120);
+    }
+  
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div id="bg-image"></div>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="Quote.html">Get a Quote</a>
+      <a href="contact.html">Contact</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="Policy.html">Policy</a>
+      <a href="Book.html">Book Now Coming Soon!</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </header>
+
+  <!-- Decorative vine header -->
+  <header class="header-bar"></header>
+  <main>
+  <!-- Confirmation Content -->
+  <div class="confirmation-box">
+    <h2>Review Your Quote</h2>
+    <div id="quote-summary" class="summary-grid"></div>
+    <button class="confirm-btn" id="confirmBtn" onclick="sendEmail()">Confirm & Submit</button>
+    <button class="cancel-btn" onclick="window.history.back()">Cancel</button>
+  </div>
+  </main>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("hT9MT4ALFi6q35DVE"); 
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    const data = JSON.parse(localStorage.getItem("quoteData"));
+
+    if (!data) {
+      document.getElementById("quote-summary").innerHTML = "<p>Error loading quote details.</p>";
+    } else {
+      const summaryHTML = `
+        <div class="summary-row"><span class="label">Name:</span><span class="value">${data.name}</span></div>
+        <div class="summary-row"><span class="label">Phone:</span><span class="value">${data.phone}</span></div>
+        <div class="summary-row"><span class="label">Email:</span><span class="value">${data.email}</span></div>
+        <div class="summary-row"><span class="label">Car Type:</span><span class="value">${data.carType}</span></div>
+        <div class="summary-row"><span class="label">Detail Type:</span><span class="value">${data.detailType === "DinoDustOff" ? "Dino Dust Off" : "Prehistoric Perfection"}</span></div>
+        <div class="summary-row"><span class="label">Add-ons:</span><span class="value">${data.addons || "None"}</span></div>
+        <div class="summary-row total"><span class="label">Estimated Total:</span><span class="value">${data.total}</span></div>
+      `;
+      document.getElementById("quote-summary").innerHTML = summaryHTML;
+    }
+
+    function sendEmail() {
+      if (!data) return;
+
+      const confirmBtn = document.getElementById("confirmBtn");
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = "Sending...";
+
+      emailjs.send("service_tc22rkb", "template_pntg20v", {
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        carType: data.carType,
+        detailType: data.detailType === "DinoDustOff" ? "Dino Dust Off" : "Prehistoric Perfection",
+        addons: data.addons,
+        total: data.total
+      })
+      .then(() => {
+        localStorage.removeItem("quoteData");
+        window.location.href = "success.html"; // Redirect on success
+      })
+      .catch((error) => {
+        console.error("Email failed:", error);
+        window.location.href = "error.html"; // Redirect on failure
+      });
+    }
+
+  </script>
+
+</body>
+</html>

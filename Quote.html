@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="Assets/favicon.png" />
+</head>
+<script>
+  function showDetailInfo(id) {
+    // Hide all detail info boxes
+    document.querySelectorAll('.detail-info').forEach(el => el.classList.add('hidden'));
+
+    // Show the selected one
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  // Optional: auto-show selected info on reload
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('DustOff').checked) {
+      showDetailInfo('DustOff-info');
+    } else if (document.getElementById('Perfection').checked) {
+      showDetailInfo('Perfection-info');
+    }
+  });
+</script>
+<body>
+  
+  <!-- Top nav bar with sublinks -->
+  <header class="top-nav">
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="Quote.html" class="active">Get a Quote!</a>
+      <a href="contact.html">Contact</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="Policy.html">Policy</a>
+      <a href="Book.html">Book Now Coming Soon!</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      &#9776;
+    </div>
+  </header>
+
+  <!-- Decorative vine header -->
+  <header class="header-bar">
+    <!-- Keep as-is -->
+  </header>
+
+  <!-- Background Video -->
+  <div id="bg-image"></div> 
+
+  <!-- Main content -->
+  <main>
+    <section class="quote-form-container">
+    <form id="quoteForm">
+      <div class="input-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="input-group">
+        <label for="number">Phone Number:</label>
+        <input type="tel" id="number" name="number" required />
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="input-group">
+        <label for="carType">Type of Car:</label>
+        <select id="carType" name="carType" required>
+          <option value="sedan">Sedan</option>
+          <option value="suv">SUV</option>
+          <option value="truck">Truck</option>
+          <option value="largeSUV">Large SUV</option>
+          <option value="largeTruck">Large Truck</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Type of Detail:</label>
+        <div class="detail-type-buttons">
+          <input type="radio" id="DustOff" name="detailType" value="DinoDustOff" hidden />
+          <label for="DustOff" class="detail-button" onclick="showDetailInfo('DustOff-info')">Dino Dust Off</label>
+
+          <input type="radio" id="Perfection" name="detailType" value="PrehistoricPerfection" hidden />
+          <label for="Perfection" class="detail-button" onclick="showDetailInfo('Perfection-info')">Prehistoric Perfection</label>
+        </div>
+
+        <div id="DustOff-info" class="detail-info hidden">
+          <h3>Interior Services:</h3>
+          <ul>
+            <li>Vacuum</li>
+            <li>Cup Holder and Center Console</li>
+            <li>Wipe Down</li>
+            <li>Windows</li>
+            <li>AC Vents</li>
+          </ul>
+
+          <h3>Exterior Services:</h3>
+          <ul>
+            <li>Hand Wash</li>
+            <li>Wax</li>
+            <li>Wheel Cleaning</li>
+            <li>Tire Shines</li>
+            <li>Door Jams</li>
+          </ul>
+        </div>
+
+        <div id="Perfection-info" class="detail-info hidden">
+          <h3>Interior Services:</h3>
+          <ul>
+            <li>In Depth Vacuum</li>
+            <li>Brush/Scrub Door Panels, Center Console, Cup Holders</li>
+            <li>Steam Clean Full Interior</li>
+            <li>Windows</li>
+          </ul>
+
+          <h3>Exterior Services:</h3>
+          <ul>
+            <li>Foamy Hand Wash</li>
+            <li>Chemical Decontamination</li>
+            <li>Clay Bar</li>
+            <li>Hydrophobic Paint Sealant (Graphene Wax)</li>
+            <li>Plastic Restoration</li>
+            <li>Wheels with Tire Shines</li>
+            <li>Door Jam Protection</li>
+            <li>Leather Cleaning and Conditioning</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="addons">
+        <label>Add-Ons:</label><br>
+        <label><input type="checkbox" name="addons" value="petHairRemoval" /> Pet Hair Removal ($50)</label><br>
+        <label><input type="checkbox" name="addons" value="steamCleaning" /> Steam Cleaning ($70)</label><br>
+        <label><input type="checkbox" name="addons" value="leatherShampoo" /> Leather Shampoo/Conditioner ($80)</label><br>
+        <label><input type="checkbox" name="addons" value="headlightRestoration" /> Headlight Restoration ($100)</label><br>
+        <label><input type="checkbox" name="addons" value="engineBayDetail" /> Engine Bay Detail ($30)</label><br>
+        <label><input type="checkbox" name="addons" value="plasticSpray" /> Plastic Spray Protectant ($50)</label><br>
+        <label><input type="checkbox" name="addons" value="clayBar" /> Clay Bar ($75)</label><br>
+      </div>
+
+      <div class="submit-btn">
+        <button type="submit">Review Quote</button>
+      </div>
+    </form>
+  </section>
+  <div class="image-button-container">
+    <button class="image-button" onclick="location.href='index.html'">
+      <img src="Assets/Backbtn.png" alt="Back to homepage" />
+    </button>
+  </div>
+
+  </main>
+
+  <!-- JavaScript for menu, pricing, and redirection -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("hT9MT4ALFi6q35DVE");
+
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("active");
+    }
+
+    function showDetailInfo(id) {
+      document.querySelectorAll('.detail-info').forEach(el => el.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    document.getElementById("quoteForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("number").value;
+      const email = document.getElementById("email").value;
+      const carType = document.getElementById("carType").value;
+      const detailTypeEl = document.querySelector('input[name="detailType"]:checked');
+      const addonElems = document.querySelectorAll('input[name="addons"]:checked');
+
+      if (!detailTypeEl) {
+        alert("Please select a detail package.");
+        return;
+      }
+
+      const detailType = detailTypeEl.value;
+
+      // Pricing logic
+      const pricing = {
+        DinoDustOff: {
+          sedan: 130,
+          suv: 150,
+          truck: 150,
+          largeSUV: 180,
+          largeTruck: 180
+        },
+        PrehistoricPerfection: {
+          sedan: 250,
+          suv: 350,
+          truck: 350,
+          largeSUV: 400,
+          largeTruck: 400
+        }
+      };
+
+      const addonPrices = {
+        petHairRemoval: 50,
+        steamCleaning: 70,
+        leatherShampoo: 80,
+        headlightRestoration: 100,
+        engineBayDetail: 30,
+        plasticSpray: 50,
+        clayBar: 75
+      };
+
+      const basePrice = pricing[detailType][carType] || 0;
+
+      let selectedAddons = [];
+      let addonTotal = 0;
+
+      addonElems.forEach(el => {
+        selectedAddons.push(el.value);
+        addonTotal += addonPrices[el.value] || 0;
+      });
+
+      const total = basePrice + addonTotal;
+
+      // Compile data for next page
+      const addonLabels = {
+        petHairRemoval: "Pet Hair Removal ($50)",
+        steamCleaning: "Steam Cleaning ($70)",
+        leatherShampoo: "Leather Shampoo/Conditioner ($80)",
+        headlightRestoration: "Headlight Restoration ($100)",
+        engineBayDetail: "Engine Bay Detail ($30)",
+        plasticSpray: "Plastic Spray Protectant ($50)",
+        clayBar: "Clay Bar ($75)"
+      };
+
+      const readableAddons = selectedAddons.length > 0
+        ? selectedAddons.map(addon => addonLabels[addon] || addon).join(', ')
+        : "None";
+
+      const formData = {
+        name,
+        phone,
+        email,
+        carType,
+        detailType,
+        addons: readableAddons,
+        total: `$${total}`
+      };
+
+
+      // Store in localStorage and redirect
+      localStorage.setItem("quoteData", JSON.stringify(formData));
+      window.location.href = "confirm.html";
+    });
+  </script>
+
+</body>
+</html>
